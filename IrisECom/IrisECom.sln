@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrisECom", "IrisECom.csproj", "{29C00108-FDC1-4190-B86F-CD402A832A4A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IrisEComTest", "..\IrisEComTest\IrisEComTest.csproj", "{687C7EEA-CBE3-49EF-9DA6-D47CF44EFC07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29C00108-FDC1-4190-B86F-CD402A832A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C00108-FDC1-4190-B86F-CD402A832A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C00108-FDC1-4190-B86F-CD402A832A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29C00108-FDC1-4190-B86F-CD402A832A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687C7EEA-CBE3-49EF-9DA6-D47CF44EFC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687C7EEA-CBE3-49EF-9DA6-D47CF44EFC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687C7EEA-CBE3-49EF-9DA6-D47CF44EFC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687C7EEA-CBE3-49EF-9DA6-D47CF44EFC07}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B36D740E-CE11-4E24-AC88-2677CDBA0473}
+	EndGlobalSection
+EndGlobal
