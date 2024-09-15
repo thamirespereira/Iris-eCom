@@ -6,7 +6,7 @@ namespace IrisECom.Services
     {
         IEnumerable<Usuario> BuscarTodos();
         Usuario? BuscarPorId(int id);
-        IEnumerable<Usuario> BuscarPorEmail(string email);
+        Usuario? BuscarPorEmail(string email);
         int Inserir(Usuario usuario);
         int Atualizar(Usuario usuario);
         int Excluir(int id);

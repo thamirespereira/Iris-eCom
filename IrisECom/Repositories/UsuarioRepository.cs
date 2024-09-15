@@ -33,11 +33,12 @@ namespace IrisECom.Repositories
                 .FirstOrDefault();
         }
 
-        public IEnumerable<Usuario> BuscarPorEmail(string email)
+        public Usuario? BuscarPorEmail(string email)
         {
             return context.Usuarios
                 .Include(u => u.Produtos)
-                .Where(u => u.Email.Contains(email)).ToList();
+                .Where(u => u.Email.Contains(email))
+                .FirstOrDefault();
         }
 
         public int Inserir(Usuario usuario)

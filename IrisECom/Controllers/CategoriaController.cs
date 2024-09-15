@@ -18,6 +18,12 @@ namespace IrisECom.Controllers
             this.categoriaService = categoriaService;
         }
 
+        /// <summary>
+        /// Busca todas as categorias
+        /// </summary>
+        /// <returns>Uma lista com todas as categorias</returns>
+        /// <response code="200">Categorias</response>
+        /// <response code="500">ex.Message</response>
         [HttpGet]
         public IActionResult BuscarTodos()
         {
@@ -32,6 +38,14 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca categoria por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A categoria pesquisada</returns>
+        /// <response code="200">Categoria</response>
+        /// <response code="404">Categoria não encontrada</response>
+        /// <response code="500">ex.Message</response>
         [HttpGet("/BuscarPorId/{id}")]
         public IActionResult BuscarPorId(int id)
         {
@@ -50,6 +64,14 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca categoria pelo nome
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <returns>Uma lista de categorias que contenham o nome pesquisado </returns>
+        /// <response code="200">Categorias</response>
+        /// <response code="404">Categoria não encontrada</response>
+        /// <response code="500">ex.Message</response>
         [HttpGet("/BuscarPorNome/{nome}")]
         public IActionResult BuscarPorNome(string nome)
         {
@@ -69,6 +91,13 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Cria uma categoria nova
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns>A categoria criada</returns>
+        /// <response code="200">Categoria</response>
+        /// <response code="500">ex.Message</response>
         [HttpPost]
         public IActionResult Inserir([FromBody] Categoria categoria)
         {
@@ -83,6 +112,13 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza uma categoria
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns>A categoria atualizada</returns>
+        /// <response code="200">Categoria</response>
+        /// <response code="500">ex.Message</response>
         [HttpPut]
         public IActionResult Atualizar(Categoria categoria)
         {
@@ -97,13 +133,20 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Exclui uma categoria por Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Uma mensagem de categoria não encontrada</returns>
+        /// <response code="404">Categoria não encontrada. A categoria foi excluída.</response>
+        /// <response code="500">ex.Message</response>
         [HttpDelete("{id}")]
         public IActionResult Excluir(int id)
         {
             try
             {
                 categoriaService.Excluir(id);
-                return NotFound("Categoria não encontrada.");
+                return NotFound("Categoria não encontrada. A categoria foi excluída.");
             }
             catch (Exception ex)
             {

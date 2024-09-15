@@ -15,7 +15,7 @@ namespace IrisECom.Services.Implements
             return _usuarioRepository.Atualizar(usuario);
         }
 
-        public IEnumerable<Usuario> BuscarPorEmail(string email)
+        public Usuario BuscarPorEmail(string email)
         {
             return _usuarioRepository.BuscarPorEmail(email);
         }

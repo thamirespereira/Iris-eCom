@@ -17,6 +17,13 @@ namespace IrisECom.Controllers
             this.usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
         }
 
+        /// <summary>
+        /// Busca todos os usuários
+        /// </summary>
+        /// <returns>Uma lista com todos os usuérios cadastrados</returns>
+        /// <response code="200">Usuários</response>
+        /// <response code="404">Nenhum usuário encontrado</response>
+        /// <response code="500">ex.Message</response>
         [HttpGet]
         public IActionResult BuscarTodos()
         {
@@ -36,6 +43,14 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca um usuário por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Usuário encontrado</returns>
+        /// <response code="200">Usuário</response>
+        /// <response code="404">Usuário não encontrado</response>
+        /// <response code="500">ex.Message</response>
         [HttpGet("/buscarId/{id}")]
         public IActionResult BuscarPorId(int id)
         {
@@ -54,17 +69,25 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca um usuário por email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Um usuário</returns>
+        /// <response code="200">Usuário</response>
+        /// <response code="404">Usuário não encontrado</response>
+        /// <response code="500">ex.Message</response>
         [HttpGet("/buscarEmail/{email}")]
         public IActionResult BuscarPorEmail(string email)
         {
             try
             {
-                var usuarios = usuarioService.BuscarPorEmail(email);
-                if(!usuarios.Any())
+                var usuario = usuarioService.BuscarPorEmail(email);
+                if(usuario == null)
                 {
                     return NotFound("Usuário não encontrado.");
                 }
-                return Ok(usuarios);
+                return Ok(usuario);
             }
             catch (Exception ex)
             {
@@ -72,12 +95,20 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Cria um usuário
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns>O usuário criado</returns>
+        /// <response code="200">Usuário</response>
+        /// <response code="400">Usuário já cadastrado</response>
+        /// <response code="500">ex.Message</response>
         [HttpPost]
         public IActionResult Inserir([FromBody] Usuario usuario)
         {
             try
             {
-                if (usuarioService.BuscarPorEmail(usuario.Email).Any())
+                if (usuarioService.BuscarPorEmail(usuario.Email) != null)
                 {
                     return BadRequest("Usuário já cadastrado.");
                 }
@@ -90,6 +121,13 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza os dados do usuário
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns>O usuário atualizado</returns>
+        /// <response code="200">Usuário</response>
+        /// <response code="500">ex.Message</response>
         [HttpPut]
         public IActionResult Atualizar(Usuario usuario)
         {
@@ -104,13 +142,20 @@ namespace IrisECom.Controllers
             }
         }
 
+        /// <summary>
+        /// Exclui um usuário por Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Uma mensagem de usuário não encontrado</returns>
+        /// <response code="404">Usuário não encontrado. O usuário foi excluído.</response>
+        /// <response code="500">ex.Message</response>
         [HttpDelete("{id}")]
         public IActionResult Excluir(int id)
         {
             try
             {
                 var numLinhas = usuarioService.Excluir(id);
-                return NotFound("Usuário não encontrado.");
+                return NotFound("Usuário não encontrado. O usuário foi excluído.");
             }
             catch (Exception ex)
             {
