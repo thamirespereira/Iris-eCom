@@ -308,3 +308,4 @@ C:\Users\thamires\Documents\Academia_dotNet\Iris-eCom\IrisEComTest\obj\Debug\net
 C:\Users\thamires\Documents\Academia_dotNet\Iris-eCom\IrisEComTest\obj\Debug\net8.0\IrisEComTest.pdb
 C:\Users\thamires\Documents\Academia_dotNet\Iris-eCom\IrisEComTest\obj\Debug\net8.0\IrisEComTest.genruntimeconfig.cache
 C:\Users\thamires\Documents\Academia_dotNet\Iris-eCom\IrisEComTest\obj\Debug\net8.0\ref\IrisEComTest.dll
+C:\Users\thamires\Documents\Academia_dotNet\Iris-eCom\IrisEComTest\obj\Debug\net8.0\IrisEComTest.sourcelink.json

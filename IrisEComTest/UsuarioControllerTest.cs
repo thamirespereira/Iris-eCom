@@ -21,6 +21,9 @@ namespace IrisEComTest
             restClient = new RestClient("https://localhost:7178/api/Usuario");
         }
 
+        /// <summary>
+        /// Deve retornar o usuário com id 1
+        /// </summary>
         [Fact]
         public void BuscarTodosTest()
         {
@@ -50,6 +53,10 @@ namespace IrisEComTest
             };
         }
 
+        /// <summary>
+        /// Deve retornar o usuário com id 1
+        /// </summary>
+        /// <param name="id"></param>
         [Theory]
         [InlineData(1)]
         public void BuscarPorIdTest(int id)
@@ -70,6 +77,10 @@ namespace IrisEComTest
             Assert.Equal(1, returnValue.Id);
         }
 
+        /// <summary>
+        /// Deve retornar Not Found
+        /// </summary>
+        /// <param name="id"></param>
         [Theory]
         [InlineData(10)]
         public void BuscarPorIdNotFoundTest(int id)
@@ -95,6 +106,10 @@ namespace IrisEComTest
             return new Usuario { Id = id, Nome = "Thamires" };
         }
 
+        /// <summary>
+        /// Deve retornar o usuário com email thamiresemail.com
+        /// </summary>
+        /// <param name="email"></param>
         [Theory]
         [InlineData("thamiresemail.com")]
         public void BuscarPorEmailTest(string email)
@@ -111,19 +126,20 @@ namespace IrisEComTest
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnValue = Assert.IsType<List<Usuario>>(okResult.Value);
-            Assert.Equal(1, returnValue.Count);
+            var returnValue = Assert.IsType<Usuario>(okResult.Value);
+            Assert.Equal("thamiresemail.com", returnValue.Email);
         }
 
         //Função auxiliar
-        private List<Usuario> GetUsuarioPorEmail(string email)
+        private Usuario GetUsuarioPorEmail(string email)
         {
-            return new List<Usuario>
-                {
-                new Usuario { Id = 1, Email = email },
-                };
+            return new Usuario { Id = 1, Email = email };
+                
         }
 
+        /// <summary>
+        /// Deve inserir o usuário com id 5 e nome Nanda
+        /// </summary>
         [Fact]
         public void InserirUsuarioTest()
         {
@@ -145,6 +161,9 @@ namespace IrisEComTest
             Assert.Equal("Nanda", returnValue.Nome);
         }
 
+        /// <summary>
+        /// Deve atualizar o nome do usuário de id 5 para Fernanda e retornar o usuário atualizado
+        /// </summary>
         [Fact]
         public void AtualizarUsuarioTest()
         {
@@ -166,6 +185,10 @@ namespace IrisEComTest
             Assert.Equal("Fernanda", returnValue.Nome);
         }
 
+        /// <summary>
+        /// Deve excluír o usuário com id 5 e retornar uma mensagem de usuário não encontrado
+        /// </summary>
+        /// <param name="id"></param>
         [Theory]
         [InlineData(5)]
         public void ExcluirUsuarioTest(int id)
@@ -182,7 +205,7 @@ namespace IrisEComTest
 
             //Assert
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
-            Assert.Equal("Usuário não encontrado.", notFoundResult.Value);
+            Assert.Equal("Usuário não encontrado. O usuário foi excluído.", notFoundResult.Value);
 
         }
     }

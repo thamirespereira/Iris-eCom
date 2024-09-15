@@ -15,6 +15,10 @@ namespace IrisEComTest
         {
             restClient = new RestClient("https://localhost:7178/api/Categoria");
         }
+
+        /// <summary>
+        /// Deve retornar uma lista com as categorias Hardware e Periféricos
+        /// </summary>
         [Fact]
         public void BuscarTodosTest()
         {
@@ -44,6 +48,10 @@ namespace IrisEComTest
             };
         }
 
+        /// <summary>
+        /// Deve retornar a categoria com id 1
+        /// </summary>
+        /// <param name="id"></param>
         [Theory]
         [InlineData(1)]
         public void BuscarPorIdTest(int id)
@@ -64,6 +72,10 @@ namespace IrisEComTest
             Assert.Equal(1, returnValue.Id);
         }
 
+        /// <summary>
+        /// Deve retornar Not Found
+        /// </summary>
+        /// <param name="id"></param>
         [Theory]
         [InlineData(10)]
         public void BuscarPorIdNotFoundTest(int id)
@@ -89,6 +101,10 @@ namespace IrisEComTest
             return new Categoria { Id = id, Nome = "Hardware" };
         }
 
+        /// <summary>
+        /// Deve retornar duas categorias, Hardware e Periféricos
+        /// </summary>
+        /// <param name="nome"></param>
         [Theory]
         [InlineData("Hardware")]
         [InlineData("Periféricos")]
@@ -120,6 +136,9 @@ namespace IrisEComTest
                 };
         }
 
+        /// <summary>
+        /// Deve inserir uma categoria com Id 5 e Nome Smartphone
+        /// </summary>
         [Fact]
         public void InserirCategoriaTest()
         {
@@ -141,6 +160,9 @@ namespace IrisEComTest
             Assert.Equal("Smartphone", returnValue.Nome);
         }
 
+        /// <summary>
+        /// Deve atualizar o nome da categoria com Id 5 para Celular
+        /// </summary>
         [Fact]
        public void AtualizarCategoriaTest()
         {
@@ -162,6 +184,10 @@ namespace IrisEComTest
             Assert.Equal("Celular", returnValue.Nome);
         }
 
+        /// <summary>
+        /// Deve retornar Not Found
+        /// </summary>
+        /// <param name="id"></param>
         [Theory]
         [InlineData(5)]
         public void ExcluirCategoriaTest(int id)
@@ -178,7 +204,7 @@ namespace IrisEComTest
 
             //Assert
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
-            Assert.Equal("Categoria não encontrada.", notFoundResult.Value);
+            Assert.Equal("Categoria não encontrada. A categoria foi excluída.", notFoundResult.Value);
             
         }
     }
