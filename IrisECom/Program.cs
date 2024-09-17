@@ -34,8 +34,8 @@ if (builder.Configuration["Environment:Start"] == "PROD")
         .SetBasePath(Directory.GetCurrentDirectory())
         .AddJsonFile("secrets.json");*/
     builder.Configuration
-    .AddJsonFile("/app/secrets.json", optional: true)
-    .AddJsonFile("secrets.json", optional: true);
+    .AddJsonFile("/app/secrets.json", optional: false)
+    .AddJsonFile("secrets.json", optional: false);
 
 
     var connectionString = builder.Configuration
