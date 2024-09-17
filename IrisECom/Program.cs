@@ -128,6 +128,7 @@ if (app.Environment.IsDevelopment())
 
 if (app.Environment.IsProduction())
 {
+    app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Íris eCom - v1");
