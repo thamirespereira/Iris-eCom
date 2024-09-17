@@ -13,10 +13,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["IrisECom.csproj", "."]
-RUN dotnet restore "./IrisECom.csproj"
+COPY ["IrisECom/IrisECom.csproj", "IrisECom/"]
+RUN dotnet restore "./IrisECom/IrisECom.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/IrisECom"
 RUN dotnet build "./IrisECom.csproj" -c Release -o /app/build
 
 # Esta fase é usada para publicar o projeto de serviço a ser copiado para a fase final
