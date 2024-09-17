@@ -2,6 +2,7 @@
 
 # Esta fase é usada durante a execução no VS no modo rápido (Padrão para a configuração de Depuração)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+ENV ASPNETCORE_URLS http://*:80
 USER app
 WORKDIR /app
 EXPOSE 8080
@@ -16,12 +17,12 @@ COPY ["IrisECom.csproj", "."]
 RUN dotnet restore "./IrisECom.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "./IrisECom.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./IrisECom.csproj" -c Release -o /app/build
 
 # Esta fase é usada para publicar o projeto de serviço a ser copiado para a fase final
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./IrisECom.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./IrisECom.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Esta fase é usada na produção ou quando executada no VS no modo normal (padrão quando não está usando a configuração de Depuração)
 FROM base AS final
