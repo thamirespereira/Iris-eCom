@@ -23,14 +23,18 @@ builder.Services.AddControllers()
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
-// Conex„o com o Banco de dados
+// Conex√£o com o Banco de dados
 if (builder.Configuration["Environment:Start"] == "PROD")
 {
-    // Conex„o com o PostgresSQL - Nuvem
+    // Conex√£o com o PostgresSQL - Nuvem
 
-    builder.Configuration
+    /*builder.Configuration
         .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("secrets.json");
+        .AddJsonFile("secrets.json");*/
+    builder.Configuration
+    .AddJsonFile("/app/secrets.json", optional: true)
+    .AddJsonFile("secrets.json", optional: true);
+
 
     var connectionString = builder.Configuration
    .GetConnectionString("ProdConnection");
@@ -41,7 +45,7 @@ if (builder.Configuration["Environment:Start"] == "PROD")
 }
 else
 {
-    // Conex„o com o SQL Server - Localhost
+    // Conex√£o com o SQL Server - Localhost
     var connectionString = builder.Configuration
     .GetConnectionString("DefaultConnection");
 
@@ -50,12 +54,12 @@ else
     );
 }
 
-// ConfiguraÁıes repositories
+// Configura√ß√µes repositories
 builder.Services.AddScoped<ProdutoRepository>();
 builder.Services.AddScoped<CategoriaRepository>();
 builder.Services.AddScoped<UsuarioRepository>();
 
-// ConfiguraÁıes services
+// Configura√ß√µes services
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
@@ -65,12 +69,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
 
-    //Personalizar a P·gna inicial do Swagger
+    //Personalizar a P√°gna inicial do Swagger
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Projeto Õris eCom",
-        Description = "Projeto Õris eCom - ASP.NET Core 8 - Entity Framework",
+        Title = "Projeto √çris eCom",
+        Description = "Projeto √çris eCom - ASP.NET Core 8 - Entity Framework",
         Contact = new OpenApiContact
         {
             Name = "Thamires Fernanda Rodrigues Pereira",
@@ -88,7 +92,7 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 });
-// ConfiguraÁ„o do CORS
+// Configura√ß√£o do CORS
 builder.Services.AddCors(options =>
     {
         options.AddPolicy(name: "MyPolicy",
@@ -118,13 +122,13 @@ if (app.Environment.IsDevelopment())
         app.UseSwaggerUI();
     }
 
-// Swagger Como P·gina Inicial - Nuvem
+// Swagger Como P√°gina Inicial - Nuvem
 
 if (app.Environment.IsProduction())
 {
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Õris eCom - v1");
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "√çris eCom - v1");
         options.RoutePrefix = string.Empty;
     });
 }
