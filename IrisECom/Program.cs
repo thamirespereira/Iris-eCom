@@ -8,6 +8,8 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var urls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "http://localhost:5001";
+builder.WebHost.UseUrls(urls);
 
 // Add services to the container.
 
