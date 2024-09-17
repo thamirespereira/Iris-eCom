@@ -7,6 +7,9 @@
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <DocumentationFile>bin\Debug\net8.0\DocumentingSwagger.xml</DocumentationFile>
       <NoWarn>$(NoWarm);1591</NoWarn>
+      <UserSecretsId>ca7e177b-d68d-4e37-a59c-3d8ad089fd86</UserSecretsId>
+      <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+      <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +20,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
   </ItemGroup>
 

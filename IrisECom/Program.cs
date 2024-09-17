@@ -4,8 +4,10 @@ using IrisECom.Services.Implements;
 using IrisECom.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -22,13 +24,31 @@ builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
 // Conexão com o Banco de dados
-var connectionString = builder.Configuration.
-GetConnectionString("DefaultConnection");
+if (builder.Configuration["Environment:Start"] == "PROD")
+{
+    // Conexão com o PostgresSQL - Nuvem
 
-// Registra o DataContext como um serviço de contexto de banco de dados
-builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(connectionString)
-);
+    builder.Configuration
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("secrets.json");
+
+    var connectionString = builder.Configuration
+   .GetConnectionString("ProdConnection");
+
+    builder.Services.AddDbContext<DataContext>(options =>
+        options.UseNpgsql(connectionString)
+    );
+}
+else
+{
+    // Conexão com o SQL Server - Localhost
+    var connectionString = builder.Configuration
+    .GetConnectionString("DefaultConnection");
+
+    builder.Services.AddDbContext<DataContext>(options =>
+        options.UseSqlServer(connectionString)
+    );
+}
 
 // Configurações repositories
 builder.Services.AddScoped<ProdutoRepository>();
@@ -82,14 +102,34 @@ builder.Services.AddCors(options =>
 
     var app = builder.Build();
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
+// Criar o Banco de dados e as tabelas Automaticamente
+using (var scope = app.Services.CreateAsyncScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+    dbContext.Database.EnsureCreated();
+}
+
+app.UseDeveloperExceptionPage();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
+// Swagger Como Página Inicial - Nuvem
+
+if (app.Environment.IsProduction())
+{
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Íris eCom - v1");
+        options.RoutePrefix = string.Empty;
+    });
+}
+
+app.UseHttpsRedirection();
 
     app.UseCors("MyPolicy");
 
