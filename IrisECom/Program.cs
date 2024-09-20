@@ -29,10 +29,6 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 if (builder.Configuration["Environment:Start"] == "PROD")
 {
     // Conexão com o PostgresSQL - Nuvem
-
-    /*builder.Configuration
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("secrets.json");*/
     builder.Configuration
     .AddJsonFile("/etc/secrets/secrets.json", optional: true)
     .AddJsonFile("secrets.json", optional: true);
@@ -109,13 +105,13 @@ builder.Services.AddCors(options =>
     var app = builder.Build();
 
 // Criar o Banco de dados e as tabelas Automaticamente
-using (var scope = app.Services.CreateAsyncScope())
+/*using (var scope = app.Services.CreateAsyncScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
     dbContext.Database.EnsureCreated();
 }
 
-app.UseDeveloperExceptionPage();
+app.UseDeveloperExceptionPage();*/
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
