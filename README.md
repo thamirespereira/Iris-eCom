@@ -572,6 +572,21 @@
     <li>EntityFrameworkCore.Tools</li>
     <li>Swashbuckle.AspNetCore</li>
   </ul>
+  <strong>3. Criação do banco de dados:</strong>
+  <ul>
+    <li>Execute o script sql de criação que se encontra na pasta SQL;</li>
+    <li>Execute o script de inserção para uma melhor experiência ao utilizar nosso Front-End.</li>
+  </ul>
+  <strong>4. Mude a Connection String</strong>
+  <ul>
+    <li>No projeto, navegue até o arquivo appsettings.json;</li>
+    <li>Mude a Connection String conforme o exemplo:</li>
+    <pre><code>
+      "ConnectionStrings": {
+  "DefaultConnection": "Server=nomeDoSeuServidor;Initial Catalog=db_irisecom;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true;Encrypt=False",
+}
+    </code></pre>
+  </ul>
 
   <h2>Testes da API</h2>
 <p>Para garantir a qualidade e a robustez da API, utilizamos uma suíte de testes automatizados. Aqui estão as instruções para executar os testes.</p>
