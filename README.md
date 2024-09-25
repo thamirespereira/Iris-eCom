@@ -510,6 +510,9 @@
   <li>Descrição: Remove uma categoria do sistema.</li>
   <li>Resposta de Sucesso (404 - Not Found)</li>
 </ul>
+<pre><code>
+  Categoria não encontrada. A categoria foi excluída.
+</code></pre>
 
 <h3>🔗Erros comuns</h3>
 <strong>1. 404 - Not Found</strong>
