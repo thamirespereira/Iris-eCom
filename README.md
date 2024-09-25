@@ -26,7 +26,7 @@
   <li>Excluir categorias.</li>
 </ul>
 
-<h3>Endpoints</h3>
+<h3>🔗Endpoints</h3>
 <h4>Usuários</h4>
 <strong>1. Cadastrar um usuário</strong>
 <ul>
@@ -67,6 +67,7 @@
   "imagem": "Exemplo"
 }
 </code></pre>
+
 <strong>2. Buscar dados do usuário</strong>
 <ul>
   <li>URL: /buscarId/{id}</li>
@@ -164,6 +165,7 @@
 <li>Método: PUT</li>
 <li>Descrição: Atualiza as informações de um usuário.</li>
 <li>Corpo da Requisição:</li>
+</ul>
   <pre><code>
     {
       "id": 0,
@@ -180,7 +182,9 @@
       "imagem": "string"
     }
   </code></pre>
-  <li>Resposta de Sucesso (200 - OK):</li>
+  <ul>
+    <li>Resposta de Sucesso (200 - OK):</li>
+  </ul>
   <pre><code>
     {
       "id": 9,
@@ -197,7 +201,6 @@
       "imagem": "Exemplo"
     }
   </code></pre>
-</ul>
 
  <strong>6. Excluir usuário</strong>
  <ul>
@@ -205,16 +208,310 @@
    <li>Método: DELETE</li>
    <li>Descrição: Remove um usuário do sistema.</li>
    <li>Resposta de Sucesso (404 - Not Found):</li>
-   <pre><code>
+ </ul>
+    <pre><code>
      Usuário não encontrado. O usuário foi excluído.
    </code></pre>
- </ul>
 
+<h4>Produtos</h4>
+<strong>1. Cadastrar um novo produto</strong>
+<ul>
+  <li>URL: /api/Produto</li>
+  <li>Método: POST</li>
+  <li>Descrição: Adiciona um novo produto ao catálogo.</li>
+  <li>Corpo da Requisição:</li>
+</ul>
+  <pre><code>
+    {
+      "nome": "string",
+      "descricao": "string",
+      "preco": 0,
+      "infoTecnica": "string",
+      "quantidade": 0,
+      "imagem": "string",
+      "categoriaId": 0,
+      "usuarioId": 0
+    }
+  </code></pre>
+  <ul>
+  <li>Resposta de Sucesso (201 - Created):</li>
+  </ul>
+  <pre><code>
+    {
+      "id": 14,
+      "nome": "Processador",
+      "descricao": "Exemplo",
+      "preco": 500,
+      "infoTecnica": "Exemplo",
+      "quantidade": 45,
+      "imagem": "Exemplo",
+      "categoriaId": 1,
+      "usuarioId": 8
+    }
+  </code></pre>
 
+<strong>2. Atualizar um produto</strong>
+<ul>
+  <li>URL: /api/Produto</li>
+  <li>Método: PUT</li>
+  <li>Descrição: Atualiza as informações de um produto existente.</li>
+  <li>Corpo da Requisição:</li>
+</ul>
+<pre><code>
+  {
+    "id": 0,
+    "nome": "string",
+    "descricao": "string",
+    "preco": 0,
+    "infoTecnica": "string",
+    "quantidade": 0,
+    "imagem": "string",
+    "categoriaId": 0,
+    "usuarioId": 0
+  }
+</code></pre>
+<ul>
+  <li>Resposta de Sucesso (200 - OK):</li>
+</ul>
+<pre><code>
+  {
+    "id": 14,
+    "nome": "Processador Atualizado",
+    "descricao": "Exemplo Atualizado",
+    "preco": 500,
+    "infoTecnica": "Exemplo Atualizado",
+    "quantidade": 50,
+    "imagem": "Exemplo Atualizado",
+    "categoriaId": 1,
+    "usuarioId": 8
+  }
+</code></pre>
 
+<strong>3. Buscar produtos</strong>
+<ul>
+  <li>URL: /api/Produto</li>
+  <li>Método: GET</li>
+  <li>Descrição: Retorna uma lista de produtos cadastrados.</li>
+  <li>Resposta de Sucesso (200 - OK):</li>
+</ul>
+<pre><code>
+[ 
+  {
+    "id": 14,
+    "nome": "Processador Atualizado",
+    "descricao": "Exemplo Atualizado",
+    "preco": 500,
+    "infoTecnica": "Exemplo Atualizado",
+    "quantidade": 50,
+    "imagem": "Exemplo Atualizado",
+    "categoriaId": 1,
+    "categoria": {
+      "id": 1,
+      "nome": "Hardware",
+      "imagem": "https://placehold.co/900x200",
+      "produtos": []
+    },
+    "usuarioId": 8
+  }
+]
+</code></pre>
 
+<strong>4. Buscar produto por id</strong>
+<ul>
+  <li>URL: /BuscaPorId{id}</li>
+  <li>Método: GET</li>
+  <li>Descrição: Retorna os detalhes de um produto específico.</li>
+  <li>Resposta de Sucesso (200 - OK):</li>
+</ul>
+<pre><code>
+  {
+    "id": 14,
+    "nome": "Processador Atualizado",
+    "descricao": "Exemplo Atualizado",
+    "preco": 500,
+    "infoTecnica": "Exemplo Atualizado",
+    "quantidade": 50,
+    "imagem": "Exemplo Atualizado",
+    "categoriaId": 1,
+    "categoria": {
+      "id": 1,
+      "nome": "Hardware",
+      "imagem": "https://placehold.co/900x200",
+      "produtos": []
+    },
+    "usuarioId": 8
+  }
+</code></pre>
 
-<h3>Erros comuns</h3>
+<strong>5. Buscar produto por nome</strong>
+<ul>
+  <li>URL: /BuscaPorNome{nome}</li>
+  <li>Método: GET</li>
+  <li>Descrição: Retorna uma lista de produtos com o nome especificado.</li>
+  <li>Resposta de Sucesso (200 - OK):</li>
+</ul>
+<pre><code>
+[
+  {
+    "id": 14,
+    "nome": "Processador Atualizado",
+    "descricao": "Exemplo Atualizado",
+    "preco": 500,
+    "infoTecnica": "Exemplo Atualizado",
+    "quantidade": 50,
+    "imagem": "Exemplo Atualizado",
+    "categoriaId": 1,
+    "categoria": {
+      "id": 1,
+      "nome": "Hardware",
+      "imagem": "https://placehold.co/900x200",
+      "produtos": []
+    },
+    "usuarioId": 8
+  }
+]
+</code></pre>
+
+<strong>6. Buscar produto por categoria</strong>
+<ul>
+  <li>URL: /BuscaPorCategoria{codigo}</li>
+  <li>Método: GET</li>
+  <li>Descrição: Retorna uma lista de produtos com a categoria especificado.</li>
+  <li>Resposta de Sucesso (200 - OK):</li>
+</ul>
+<pre><code>
+[
+  {
+    "id": 14,
+    "nome": "Processador Atualizado",
+    "descricao": "Exemplo Atualizado",
+    "preco": 500,
+    "infoTecnica": "Exemplo Atualizado",
+    "quantidade": 50,
+    "imagem": "Exemplo Atualizado",
+    "categoriaId": 1,
+    "categoria": {
+      "id": 1,
+      "nome": "Hardware",
+      "imagem": "https://placehold.co/900x200",
+      "produtos": []
+    },
+    "usuarioId": 8
+  }
+]
+</code></pre>
+
+<strong>7. Excluir um produto</strong>
+<ul>
+  <li>URL: /api/Produto/{id}</li>
+  <li>Método: DELETE</li>
+  <li>Descrição: Remove um produto do sistema.</li>
+  <li>Resposta de Sucesso (404 - Not Found)</li>
+</ul>
+<pre><code>
+  Produto não encontrado. O produto foi excluído.
+</code></pre>
+
+<h4>Categorias</h4>
+<strong>1. Cadastrar uma nova categoria</strong>
+<ul>
+  <li>URL: /api/Categoria</li>
+  <li>Método: POST</li>
+  <li>Descrição: Adiciona uma nova categoria de produtos.</li>
+  <li>Corpo da Requisição:</li>
+</ul>
+<pre><code>
+  {
+  "nome": "string",
+  "imagem": "string"
+  }
+</code></pre>
+<ul>
+  <li>Resposta de Sucesso (201 - Created):</li>
+</ul>
+<pre><code>
+  {
+    "id": 9,
+    "nome": "Tablets",
+    "imagem": "exemplo"
+  }
+</code></pre>
+
+<strong>2. Atualizar uma categoria</strong>
+<li>URL: /api/Categoria</li>
+<li>Método: PUT</li>
+<li>Descrição: Atualiza as informações de uma categoria.</li>
+<li>Corpo da Requisição:</li>
+<pre><code>
+  {
+    "id": 0,
+    "nome": "string",
+    "imagem": "string"
+  }
+</code></pre>
+<ul>
+  <li>Resposta de Sucesso (200 - OK):</li>
+</ul>
+<pre><code>
+  {
+    "id": 9,
+    "nome": "Tablets Atualizado",
+    "imagem": "Exemplo Atualizado"
+  }
+</code></pre>
+
+<strong>3. Buscar uma categoria</strong>
+<li>URL: /BuscarPorId{id}</li>
+<li>Método: GET</li>
+<li>Descrição: Busca as informações de uma categoria.</li>
+<li>Resposta de Sucesso (200 - OK):</li>
+<pre><code>
+  {
+    "id": 9,
+    "nome": "Tablets Atualizado",
+    "imagem": "Exemplo Atualizado"
+  }
+</code></pre>
+
+<strong>4. Buscar categorias por nome</strong>
+<li>URL: /BuscarPorNome{nome}</li>
+<li>Método: GET</li>
+<li>Descrição: Busca uma lista de categorias.</li>
+<li>Resposta de Sucesso (200 - OK):</li>
+<pre><code>
+  [
+    {
+      "id": 9,
+      "nome": "Tablets Atualizado",
+      "imagem": "Exemplo Atualizado"
+    }
+  ]
+</code></pre>
+
+<strong>5. Buscar todas as categorias</strong>
+<li>URL: /api/Categoria</li>
+<li>Método: GET</li>
+<li>Descrição: Busca todas as categorias cadastrada no sistema.</li>
+<li>Resposta de Sucesso (200 - OK):</li>
+<pre><code>
+  [
+      {
+      "id": 9,
+      "nome": "Tablets Atualizado",
+      "imagem": "Exemplo Atualizado"
+    }
+  ]
+</code></pre>
+
+<strong>6. Excluir uma categoria</strong>
+<ul>
+  <li>URL: /api/Categoria{id}</li>
+  <li>Método: DELETE</li>
+  <li>Descrição: Remove uma categoria do sistema.</li>
+  <li>Resposta de Sucesso (404 - Not Found)</li>
+</ul>
+
+<h3>🔗Erros comuns</h3>
 <strong>1. 404 - Not Found</strong>
 <ul>
 <li>Motivo: O recurso solicitado não foi encontrado.</li>
